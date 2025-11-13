@@ -1,8 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-void main() {
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+
+  // 폰트가 로드될 시간을 확보
+  await Future.delayed(const Duration(milliseconds: 100));
+
   runApp(const YHLabApp());
 }
 
@@ -16,7 +20,7 @@ class YHLabApp extends StatelessWidget {
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         primaryColor: const Color(0xFF1E90FF),
-        textTheme: GoogleFonts.notoSansKrTextTheme(),
+        fontFamily: 'NotoSansKR',
         useMaterial3: true,
       ),
       home: const HomePage(),
@@ -24,11 +28,44 @@ class YHLabApp extends StatelessWidget {
   }
 }
 
-class HomePage extends StatelessWidget {
+class HomePage extends StatefulWidget {
   const HomePage({super.key});
 
   @override
+  State<HomePage> createState() => _HomePageState();
+}
+
+class _HomePageState extends State<HomePage> {
+  bool _fontsLoaded = false;
+
+  @override
+  void initState() {
+    super.initState();
+    _loadFonts();
+  }
+
+  Future<void> _loadFonts() async {
+    // 폰트 로딩을 위한 충분한 시간 확보
+    await Future.delayed(const Duration(milliseconds: 200));
+    if (mounted) {
+      setState(() {
+        _fontsLoaded = true;
+      });
+    }
+  }
+
+  @override
   Widget build(BuildContext context) {
+    if (!_fontsLoaded) {
+      // 로딩 화면
+      return Scaffold(
+        backgroundColor: Colors.white,
+        body: Center(
+          child: CircularProgressIndicator(color: const Color(0xFF1E90FF)),
+        ),
+      );
+    }
+
     return Scaffold(
       body: SingleChildScrollView(
         child: Column(
@@ -57,7 +94,8 @@ class HomePage extends StatelessWidget {
         children: [
           Text(
             'YHLab',
-            style: GoogleFonts.notoSansKr(
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
               fontSize: 32,
               fontWeight: FontWeight.w900,
               color: const Color(0xFF1E90FF),
@@ -85,7 +123,8 @@ class HomePage extends StatelessWidget {
       onTap: onTap,
       child: Text(
         text,
-        style: GoogleFonts.notoSansKr(
+        style: TextStyle(
+          fontFamily: 'NotoSansKR',
           fontSize: 16,
           fontWeight: FontWeight.w500,
           color: const Color(0xFF333333),
@@ -104,16 +143,14 @@ class HomePage extends StatelessWidget {
           colors: [Color(0xFF1E90FF), Color(0xFF0066CC)],
         ),
       ),
-      padding: EdgeInsets.symmetric(
-        horizontal: 20,
-        vertical: MediaQuery.of(context).size.width > 768 ? 120 : 80,
-      ),
+      padding: EdgeInsets.symmetric(horizontal: 20, vertical: 120),
       child: Column(
         children: [
           Text(
             'YHLab',
-            style: GoogleFonts.notoSansKr(
-              fontSize: MediaQuery.of(context).size.width > 768 ? 56 : 40,
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
+              fontSize: 56,
               fontWeight: FontWeight.w900,
               color: Colors.white,
               shadows: [
@@ -129,42 +166,23 @@ class HomePage extends StatelessWidget {
           Text(
             '삶의 흐름을 매끄럽게 해주는 윤활유 같은 도구를 만듭니다.',
             textAlign: TextAlign.center,
-            style: GoogleFonts.notoSansKr(
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
               fontSize: MediaQuery.of(context).size.width > 768 ? 20 : 18,
               color: Colors.white.withOpacity(0.9),
             ),
           ),
           const SizedBox(height: 8),
           Text(
-            '일상을 더 편리하고 즐겁게 만드는 혁신적인 솔루션을 제공합니다.',
+            '사용자와 공생하는 혁신적인 솔루션을 제공합니다.',
             textAlign: TextAlign.center,
-            style: GoogleFonts.notoSansKr(
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
               fontSize: MediaQuery.of(context).size.width > 768 ? 20 : 18,
               color: Colors.white.withOpacity(0.9),
             ),
           ),
           const SizedBox(height: 32),
-          ElevatedButton(
-            onPressed: () {},
-            style: ElevatedButton.styleFrom(
-              backgroundColor: Colors.transparent,
-              foregroundColor: Colors.white,
-              padding: const EdgeInsets.symmetric(horizontal: 40, vertical: 15),
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(50),
-              ),
-              elevation: 0,
-            ).copyWith(
-              backgroundColor: WidgetStateProperty.all(const Color(0xFFFF6B6B)),
-            ),
-            child: Text(
-              '앱 둘러보기',
-              style: GoogleFonts.notoSansKr(
-                fontSize: 18,
-                fontWeight: FontWeight.w600,
-              ),
-            ),
-          ),
         ],
       ),
     );
@@ -179,7 +197,8 @@ class HomePage extends StatelessWidget {
         children: [
           Text(
             'Our Apps',
-            style: GoogleFonts.notoSansKr(
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
               fontSize: 40,
               fontWeight: FontWeight.w700,
               color: const Color(0xFF333333),
@@ -262,7 +281,10 @@ class HomePage extends StatelessWidget {
             offset: const Offset(0, 15),
           ),
         ],
-        border: Border.all(color: Colors.transparent, width: 2),
+        border: Border.all(
+          color: const Color(0xFFE8E6E1).withOpacity(0.5),
+          width: 1,
+        ),
       ),
       padding: const EdgeInsets.all(40),
       child: Column(
@@ -292,7 +314,8 @@ class HomePage extends StatelessWidget {
           // 앱 이름
           Text(
             title,
-            style: GoogleFonts.notoSansKr(
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
               fontSize: 24,
               fontWeight: FontWeight.w700,
               color: const Color(0xFF333333),
@@ -303,7 +326,8 @@ class HomePage extends StatelessWidget {
           Text(
             description,
             textAlign: TextAlign.center,
-            style: GoogleFonts.notoSansKr(
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
               fontSize: 16,
               color: const Color(0xFF666666),
               height: 1.6,
@@ -332,7 +356,8 @@ class HomePage extends StatelessWidget {
       icon: Icon(icon, size: 20),
       label: Text(
         text,
-        style: GoogleFonts.notoSansKr(
+        style: TextStyle(
+          fontFamily: 'NotoSansKR',
           fontSize: 14,
           fontWeight: FontWeight.w500,
         ),
@@ -364,7 +389,11 @@ class HomePage extends StatelessWidget {
         children: [
           Text(
             '© 2024 YHLab. All rights reserved.',
-            style: GoogleFonts.notoSansKr(fontSize: 14, color: Colors.white),
+            style: TextStyle(
+              fontFamily: 'NotoSansKR',
+              fontSize: 14,
+              color: Colors.white,
+            ),
           ),
           const SizedBox(height: 20),
           Row(
