@@ -38,10 +38,6 @@ final class HomePage extends StatelessWidget {
                     decoration: BoxDecoration(
                       color: Colors.white,
                       borderRadius: BorderRadius.circular(30),
-                      // boxShadow: YHBoxShadow.neumorphicShadow(
-                      //   spreadRadius: 6,
-                      //   blurRadius: 2,
-                      // ),
                       boxShadow: [
                         BoxShadow(
                           color: Colors.black.withAlpha(51),
@@ -123,7 +119,7 @@ final class HomePage extends StatelessWidget {
                         ConstrainedBox(
                           constraints: const BoxConstraints(maxWidth: 800),
                           child: Text(
-                            '사람은 끝없이 망각합니다.\n\n자격증 취득을 위해, 수 년 전 학습한 것을\n다시 공부한 적 없으신가요?\n\n죽을때 까지 공부할텐데..\n장기기억 형성의 필요성을 느껴\n편리한 복습을 위해 만든 앱 입니다.',
+                            '사람은 끝없이 망각합니다.\n\n자격증 취득, 면접 준비, 세미나 준비 등\n수 년 전 학습한 것을\n다시 공부한 적 없으신가요?\n\n죽을때 까지 공부할텐데..\n장기기억 형성의 필요성을 느껴\n편리한 복습을 위해 만들었습니다.',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: isMobile ? 16 : 18,

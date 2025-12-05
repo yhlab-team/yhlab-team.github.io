@@ -247,6 +247,89 @@ final class BlogDetailPage extends StatelessWidget {
                                   return const SizedBox.shrink();
                                 }
 
+                                // 이미지 (![alt](path) 형식)
+                                final imageRegex = RegExp(
+                                  r'!\[(.*?)\]\((.*?)\)',
+                                );
+                                final imageMatch = imageRegex.firstMatch(
+                                  paragraph,
+                                );
+                                if (imageMatch != null) {
+                                  final imagePath = imageMatch.group(2) ?? '';
+                                  final altText = imageMatch.group(1) ?? '';
+
+                                  return Padding(
+                                    padding: const EdgeInsets.symmetric(
+                                      vertical: 24,
+                                    ),
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.center,
+                                      children: [
+                                        ClipRRect(
+                                          borderRadius: BorderRadius.circular(
+                                            12,
+                                          ),
+                                          child: Image.asset(
+                                            imagePath,
+                                            width: double.infinity,
+                                            fit: BoxFit.contain,
+                                            errorBuilder: (
+                                              context,
+                                              error,
+                                              stackTrace,
+                                            ) {
+                                              return Container(
+                                                padding: const EdgeInsets.all(
+                                                  24,
+                                                ),
+                                                decoration: BoxDecoration(
+                                                  color: const Color(
+                                                    0xFFF1F5F9,
+                                                  ),
+                                                  borderRadius:
+                                                      BorderRadius.circular(12),
+                                                ),
+                                                child: Column(
+                                                  children: [
+                                                    const Icon(
+                                                      Icons.broken_image,
+                                                      size: 48,
+                                                      color: Color(0xFF94A3B8),
+                                                    ),
+                                                    const SizedBox(height: 8),
+                                                    Text(
+                                                      '이미지를 불러올 수 없습니다',
+                                                      style: TextStyle(
+                                                        color: const Color(
+                                                          0xFF64748B,
+                                                        ),
+                                                        fontSize: 14,
+                                                      ),
+                                                    ),
+                                                  ],
+                                                ),
+                                              );
+                                            },
+                                          ),
+                                        ),
+                                        if (altText.isNotEmpty) ...[
+                                          const SizedBox(height: 12),
+                                          Text(
+                                            altText,
+                                            textAlign: TextAlign.center,
+                                            style: const TextStyle(
+                                              fontSize: 14,
+                                              color: Color(0xFF64748B),
+                                              fontStyle: FontStyle.italic,
+                                            ),
+                                          ),
+                                        ],
+                                      ],
+                                    ),
+                                  );
+                                }
+
                                 // 제목 스타일 (### 으로 시작)
                                 if (paragraph.startsWith('### ')) {
                                   return Padding(
