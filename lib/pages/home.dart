@@ -44,7 +44,7 @@ final class HomePage extends StatelessWidget {
                       // ),
                       boxShadow: [
                         BoxShadow(
-                          color: Colors.black.withOpacity(0.2),
+                          color: Colors.black.withAlpha(51),
                           blurRadius: 40,
                           offset: const Offset(0, 20),
                         ),
@@ -334,7 +334,7 @@ final class HomePage extends StatelessWidget {
         border: Border.all(color: const Color(0xFFE2E8F0), width: 2),
         boxShadow: [
           BoxShadow(
-            color: Colors.black.withOpacity(0.05),
+            color: Colors.black.withAlpha(13),
             blurRadius: 20,
             offset: const Offset(0, 10),
           ),
@@ -346,7 +346,7 @@ final class HomePage extends StatelessWidget {
           Container(
             padding: const EdgeInsets.all(16),
             decoration: BoxDecoration(
-              color: YHColor.primary.withOpacity(0.1),
+              color: YHColor.primary.withAlpha(26),
               borderRadius: BorderRadius.circular(16),
             ),
             child: Icon(icon, size: 40, color: YHColor.primary),
@@ -398,7 +398,7 @@ final class HomePage extends StatelessWidget {
             borderRadius: BorderRadius.circular(16),
           ),
           elevation: 8,
-          shadowColor: color.withOpacity(0.5),
+          shadowColor: color.withAlpha(128),
         ),
       ),
     );

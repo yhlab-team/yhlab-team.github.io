@@ -66,7 +66,7 @@ class AppHeader extends StatelessWidget {
               children: [
                 _buildNavButton(context, '메인', '/', currentPath),
                 const SizedBox(width: 8),
-                _buildNavButton(context, '소개', '/features', currentPath),
+                _buildNavButton(context, '블로그', '/blogs', currentPath),
               ],
             )
           else
@@ -78,7 +78,7 @@ class AppHeader extends StatelessWidget {
               itemBuilder:
                   (context) => const [
                     PopupMenuItem(value: '/', child: Text('메인')),
-                    PopupMenuItem(value: '/features', child: Text('소개')),
+                    PopupMenuItem(value: '/blogs', child: Text('블로그')),
                   ],
             ),
         ],
