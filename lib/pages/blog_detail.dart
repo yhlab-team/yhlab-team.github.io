@@ -227,208 +227,212 @@ final class BlogDetailPage extends StatelessWidget {
                     child: Center(
                       child: ConstrainedBox(
                         constraints: BoxConstraints(maxWidth: maxWidth),
-                        child: Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            // 구분선
-                            Container(
-                              height: 1,
-                              color: const Color(0xFFE2E8F0),
-                            ),
+                        child: SelectionArea(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              // 구분선
+                              Container(
+                                height: 1,
+                                color: const Color(0xFFE2E8F0),
+                              ),
 
-                            const SizedBox(height: 40),
+                              const SizedBox(height: 40),
 
-                            // 본문 내용
-                            ...post.fullContent.split('\n\n').map((paragraph) {
-                              if (paragraph.trim().isEmpty) {
-                                return const SizedBox.shrink();
-                              }
+                              // 본문 내용
+                              ...post.fullContent.split('\n\n').map((
+                                paragraph,
+                              ) {
+                                if (paragraph.trim().isEmpty) {
+                                  return const SizedBox.shrink();
+                                }
 
-                              // 제목 스타일 (### 으로 시작)
-                              if (paragraph.startsWith('### ')) {
+                                // 제목 스타일 (### 으로 시작)
+                                if (paragraph.startsWith('### ')) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 32,
+                                      bottom: 16,
+                                    ),
+                                    child: Text(
+                                      paragraph.substring(4),
+                                      style: TextStyle(
+                                        fontSize: isMobile ? 22 : 26,
+                                        fontWeight: FontWeight.w900,
+                                        color: const Color(0xFF0F172A),
+                                        height: 1.3,
+                                      ),
+                                    ),
+                                  );
+                                }
+
+                                // 소제목 스타일 (## 으로 시작)
+                                if (paragraph.startsWith('## ')) {
+                                  return Padding(
+                                    padding: const EdgeInsets.only(
+                                      top: 40,
+                                      bottom: 16,
+                                    ),
+                                    child: Text(
+                                      paragraph.substring(3),
+                                      style: TextStyle(
+                                        fontSize: isMobile ? 24 : 30,
+                                        fontWeight: FontWeight.w900,
+                                        color: const Color(0xFF0F172A),
+                                        height: 1.3,
+                                      ),
+                                    ),
+                                  );
+                                }
+
+                                // 일반 단락
                                 return Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 32,
-                                    bottom: 16,
-                                  ),
+                                  padding: const EdgeInsets.only(bottom: 24),
                                   child: Text(
-                                    paragraph.substring(4),
-                                    style: TextStyle(
-                                      fontSize: isMobile ? 22 : 26,
-                                      fontWeight: FontWeight.w900,
-                                      color: const Color(0xFF0F172A),
-                                      height: 1.3,
+                                    paragraph,
+                                    style: const TextStyle(
+                                      fontSize: 17,
+                                      color: Color(0xFF334155),
+                                      height: 1.8,
+                                      letterSpacing: -0.2,
                                     ),
                                   ),
                                 );
-                              }
+                              }),
 
-                              // 소제목 스타일 (## 으로 시작)
-                              if (paragraph.startsWith('## ')) {
-                                return Padding(
-                                  padding: const EdgeInsets.only(
-                                    top: 40,
-                                    bottom: 16,
-                                  ),
-                                  child: Text(
-                                    paragraph.substring(3),
-                                    style: TextStyle(
-                                      fontSize: isMobile ? 24 : 30,
-                                      fontWeight: FontWeight.w900,
-                                      color: const Color(0xFF0F172A),
-                                      height: 1.3,
-                                    ),
-                                  ),
-                                );
-                              }
+                              const SizedBox(height: 40),
 
-                              // 일반 단락
-                              return Padding(
-                                padding: const EdgeInsets.only(bottom: 24),
-                                child: Text(
-                                  paragraph,
-                                  style: const TextStyle(
-                                    fontSize: 17,
-                                    color: Color(0xFF334155),
-                                    height: 1.8,
-                                    letterSpacing: -0.2,
+                              // 구분선
+                              Container(
+                                height: 1,
+                                color: const Color(0xFFE2E8F0),
+                              ),
+
+                              const SizedBox(height: 40),
+
+                              // CTA 섹션 - Nemo 다운로드
+                              Container(
+                                padding: EdgeInsets.all(isMobile ? 32 : 40),
+                                decoration: BoxDecoration(
+                                  gradient: LinearGradient(
+                                    begin: Alignment.topLeft,
+                                    end: Alignment.bottomRight,
+                                    colors: [
+                                      post.iconColor.withAlpha(26),
+                                      post.iconColor.withAlpha(13),
+                                    ],
+                                  ),
+                                  borderRadius: BorderRadius.circular(16),
+                                  border: Border.all(
+                                    color: post.iconColor.withAlpha(51),
+                                    width: 1,
                                   ),
                                 ),
-                              );
-                            }),
-
-                            const SizedBox(height: 40),
-
-                            // 구분선
-                            Container(
-                              height: 1,
-                              color: const Color(0xFFE2E8F0),
-                            ),
-
-                            const SizedBox(height: 40),
-
-                            // CTA 섹션 - Nemo 다운로드
-                            Container(
-                              padding: EdgeInsets.all(isMobile ? 32 : 40),
-                              decoration: BoxDecoration(
-                                gradient: LinearGradient(
-                                  begin: Alignment.topLeft,
-                                  end: Alignment.bottomRight,
-                                  colors: [
-                                    post.iconColor.withAlpha(26),
-                                    post.iconColor.withAlpha(13),
+                                child: Column(
+                                  children: [
+                                    Icon(
+                                      Icons.rocket_launch,
+                                      size: 48,
+                                      color: post.iconColor,
+                                    ),
+                                    const SizedBox(height: 16),
+                                    Text(
+                                      'Nemo와 함께 시작하세요',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: isMobile ? 22 : 26,
+                                        fontWeight: FontWeight.w900,
+                                        color: const Color(0xFF0F172A),
+                                      ),
+                                    ),
+                                    const SizedBox(height: 12),
+                                    Text(
+                                      '과학적으로 검증된 학습법으로\n더 효율적인 공부를 경험해보세요',
+                                      textAlign: TextAlign.center,
+                                      style: TextStyle(
+                                        fontSize: isMobile ? 15 : 17,
+                                        color: const Color(0xFF64748B),
+                                        height: 1.6,
+                                      ),
+                                    ),
+                                    const SizedBox(height: 24),
+                                    // 다운로드 버튼들
+                                    if (isMobile)
+                                      Column(
+                                        children: [
+                                          _buildDownloadButton(
+                                            icon: Icons.apple,
+                                            text: 'App Store에서 다운로드',
+                                            color: const Color(0xFF000000),
+                                            url:
+                                                'https://apps.apple.com/app/id1547183996',
+                                            isMobile: isMobile,
+                                          ),
+                                          const SizedBox(height: 16),
+                                          _buildDownloadButton(
+                                            icon: Icons.android,
+                                            text: 'Google Play에서 다운로드',
+                                            color: const Color(0xFF3DDC84),
+                                            url:
+                                                'https://play.google.com/store/apps/details?id=com.Nemo.ParkYoungHo',
+                                            isMobile: isMobile,
+                                          ),
+                                        ],
+                                      )
+                                    else
+                                      Row(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        children: [
+                                          _buildDownloadButton(
+                                            icon: Icons.apple,
+                                            text: 'App Store에서 다운로드',
+                                            color: const Color(0xFF000000),
+                                            url:
+                                                'https://apps.apple.com/app/id1547183996',
+                                            isMobile: isMobile,
+                                          ),
+                                          const SizedBox(width: 20),
+                                          _buildDownloadButton(
+                                            icon: Icons.android,
+                                            text: 'Google Play에서 다운로드',
+                                            color: const Color(0xFF3DDC84),
+                                            url:
+                                                'https://play.google.com/store/apps/details?id=com.Nemo.ParkYoungHo',
+                                            isMobile: isMobile,
+                                          ),
+                                        ],
+                                      ),
                                   ],
                                 ),
-                                borderRadius: BorderRadius.circular(16),
-                                border: Border.all(
-                                  color: post.iconColor.withAlpha(51),
-                                  width: 1,
-                                ),
                               ),
-                              child: Column(
-                                children: [
-                                  Icon(
-                                    Icons.rocket_launch,
-                                    size: 48,
-                                    color: post.iconColor,
-                                  ),
-                                  const SizedBox(height: 16),
-                                  Text(
-                                    'Nemo와 함께 시작하세요',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: isMobile ? 22 : 26,
-                                      fontWeight: FontWeight.w900,
-                                      color: const Color(0xFF0F172A),
-                                    ),
-                                  ),
-                                  const SizedBox(height: 12),
-                                  Text(
-                                    '과학적으로 검증된 학습법으로\n더 효율적인 공부를 경험해보세요',
-                                    textAlign: TextAlign.center,
-                                    style: TextStyle(
-                                      fontSize: isMobile ? 15 : 17,
-                                      color: const Color(0xFF64748B),
-                                      height: 1.6,
-                                    ),
-                                  ),
-                                  const SizedBox(height: 24),
-                                  // 다운로드 버튼들
-                                  if (isMobile)
-                                    Column(
-                                      children: [
-                                        _buildDownloadButton(
-                                          icon: Icons.apple,
-                                          text: 'App Store에서 다운로드',
-                                          color: const Color(0xFF000000),
-                                          url:
-                                              'https://apps.apple.com/app/id1547183996',
-                                          isMobile: isMobile,
-                                        ),
-                                        const SizedBox(height: 16),
-                                        _buildDownloadButton(
-                                          icon: Icons.android,
-                                          text: 'Google Play에서 다운로드',
-                                          color: const Color(0xFF3DDC84),
-                                          url:
-                                              'https://play.google.com/store/apps/details?id=com.Nemo.ParkYoungHo',
-                                          isMobile: isMobile,
-                                        ),
-                                      ],
-                                    )
-                                  else
-                                    Row(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      children: [
-                                        _buildDownloadButton(
-                                          icon: Icons.apple,
-                                          text: 'App Store에서 다운로드',
-                                          color: const Color(0xFF000000),
-                                          url:
-                                              'https://apps.apple.com/app/id1547183996',
-                                          isMobile: isMobile,
-                                        ),
-                                        const SizedBox(width: 20),
-                                        _buildDownloadButton(
-                                          icon: Icons.android,
-                                          text: 'Google Play에서 다운로드',
-                                          color: const Color(0xFF3DDC84),
-                                          url:
-                                              'https://play.google.com/store/apps/details?id=com.Nemo.ParkYoungHo',
-                                          isMobile: isMobile,
-                                        ),
-                                      ],
-                                    ),
-                                ],
-                              ),
-                            ),
 
-                            const SizedBox(height: 60),
+                              const SizedBox(height: 60),
 
-                            // 목록으로 돌아가기 버튼
-                            Center(
-                              child: OutlinedButton.icon(
-                                onPressed: () => context.pop(),
-                                icon: const Icon(Icons.arrow_back, size: 20),
-                                label: const Text('글 목록으로 돌아가기'),
-                                style: OutlinedButton.styleFrom(
-                                  foregroundColor: const Color(0xFF64748B),
-                                  side: const BorderSide(
-                                    color: Color(0xFFE2E8F0),
-                                    width: 2,
-                                  ),
-                                  padding: EdgeInsets.symmetric(
-                                    horizontal: isMobile ? 24 : 32,
-                                    vertical: isMobile ? 14 : 16,
-                                  ),
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(10),
+                              // 목록으로 돌아가기 버튼
+                              Center(
+                                child: OutlinedButton.icon(
+                                  onPressed: () => context.pop(),
+                                  icon: const Icon(Icons.arrow_back, size: 20),
+                                  label: const Text('글 목록으로 돌아가기'),
+                                  style: OutlinedButton.styleFrom(
+                                    foregroundColor: const Color(0xFF64748B),
+                                    side: const BorderSide(
+                                      color: Color(0xFFE2E8F0),
+                                      width: 2,
+                                    ),
+                                    padding: EdgeInsets.symmetric(
+                                      horizontal: isMobile ? 24 : 32,
+                                      vertical: isMobile ? 14 : 16,
+                                    ),
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(10),
+                                    ),
                                   ),
                                 ),
                               ),
-                            ),
-                          ],
+                            ],
+                          ),
                         ),
                       ),
                     ),
