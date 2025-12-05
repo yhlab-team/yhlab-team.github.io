@@ -371,15 +371,7 @@ final class BlogDetailPage extends StatelessWidget {
                                 // 일반 단락
                                 return Padding(
                                   padding: const EdgeInsets.only(bottom: 24),
-                                  child: Text(
-                                    paragraph,
-                                    style: const TextStyle(
-                                      fontSize: 17,
-                                      color: Color(0xFF334155),
-                                      height: 1.8,
-                                      letterSpacing: -0.2,
-                                    ),
-                                  ),
+                                  child: _buildStyledText(paragraph),
                                 );
                               }),
 
@@ -528,6 +520,66 @@ final class BlogDetailPage extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  /// 마크다운 스타일이 적용된 텍스트 빌드
+  /// **텍스트** 형식을 볼드로 변환
+  Widget _buildStyledText(String text) {
+    final List<TextSpan> spans = [];
+    final RegExp boldRegex = RegExp(r'\*\*(.*?)\*\*');
+    int lastIndex = 0;
+
+    for (final Match match in boldRegex.allMatches(text)) {
+      // 볼드 이전의 일반 텍스트
+      if (match.start > lastIndex) {
+        spans.add(
+          TextSpan(
+            text: text.substring(lastIndex, match.start),
+            style: const TextStyle(
+              fontSize: 17,
+              color: Color(0xFF334155),
+              height: 1.8,
+              letterSpacing: -0.2,
+              fontWeight: FontWeight.w400,
+            ),
+          ),
+        );
+      }
+
+      // 볼드 텍스트
+      spans.add(
+        TextSpan(
+          text: match.group(1),
+          style: const TextStyle(
+            fontSize: 17,
+            color: Color(0xFF0F172A),
+            height: 1.8,
+            letterSpacing: -0.2,
+            fontWeight: FontWeight.w700,
+          ),
+        ),
+      );
+
+      lastIndex = match.end;
+    }
+
+    // 마지막 일반 텍스트
+    if (lastIndex < text.length) {
+      spans.add(
+        TextSpan(
+          text: text.substring(lastIndex),
+          style: const TextStyle(
+            fontSize: 17,
+            color: Color(0xFF334155),
+            height: 1.8,
+            letterSpacing: -0.2,
+            fontWeight: FontWeight.w400,
+          ),
+        ),
+      );
+    }
+
+    return RichText(text: TextSpan(children: spans));
   }
 
   Widget _buildDownloadButton({
