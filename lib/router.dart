@@ -25,24 +25,48 @@ final router = GoRouter(
       ),
 );
 
+/// Fade 트랜지션을 적용한 페이지 빌더
+CustomTransitionPage _buildPageWithFadeTransition({
+  required Widget child,
+  required GoRouterState state,
+}) {
+  return CustomTransitionPage(
+    key: state.pageKey,
+    child: child,
+    transitionsBuilder: (context, animation, secondaryAnimation, child) {
+      return FadeTransition(opacity: animation, child: child);
+    },
+    transitionDuration: const Duration(milliseconds: 300),
+  );
+}
+
 GoRoute _homeRoute() => GoRoute(
   name: RouteNames.home,
   path: RouteNames.home,
-  builder: (context, state) => const HomePage(),
+  pageBuilder:
+      (context, state) =>
+          _buildPageWithFadeTransition(child: const HomePage(), state: state),
 );
 
 GoRoute _blogListRoute(List<GoRoute> routes) => GoRoute(
   path: RouteNames.blogList,
   name: RouteNames.blogList,
-  builder: (context, state) => const BlogListPage(),
+  pageBuilder:
+      (context, state) => _buildPageWithFadeTransition(
+        child: const BlogListPage(),
+        state: state,
+      ),
   routes: routes,
 );
 
 GoRoute _blogDetailRoute() => GoRoute(
   path: ':postId',
-  name: RouteNames.blogDetail,
-  builder: (context, state) {
+  name: 'blogDetail',
+  pageBuilder: (context, state) {
     final postId = state.pathParameters['postId'] ?? '';
-    return BlogDetailPage(postId: postId);
+    return _buildPageWithFadeTransition(
+      child: BlogDetailPage(postId: postId),
+      state: state,
+    );
   },
 );

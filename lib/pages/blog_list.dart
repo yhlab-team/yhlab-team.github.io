@@ -124,7 +124,7 @@ final class BlogListPage extends StatelessWidget {
         child: InkWell(
           borderRadius: BorderRadius.circular(16),
           onTap: () {
-            context.push('/blogs/${post.id}');
+            context.go('/blogs/${post.id}');
           },
           child: Padding(
             padding: EdgeInsets.all(isMobile ? 24 : 32),

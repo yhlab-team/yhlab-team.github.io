@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_web_plugins/url_strategy.dart';
 import 'package:yhlab_web/router.dart';
 
 void main() {
+  // Flutter Web에서 깔끔한 URL 사용 (해시 제거)
+  usePathUrlStrategy();
   runApp(const YHLabApp());
 }
 

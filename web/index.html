@@ -19,7 +19,26 @@
 
   <meta charset="UTF-8">
   <meta content="IE=Edge" http-equiv="X-UA-Compatible">
-  <meta name="description" content="A new Flutter project.">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+  <!-- SEO 메타 태그 -->
+  <meta name="description" content="YHLab - Nemo는 망각곡선 기반 간격 반복 학습을 통해 효율적인 학습을 도와주는 플래시카드 앱입니다.">
+  <meta name="keywords" content="Nemo, AI, 플래시카드, 간격반복, 망각곡선, 학습앱, 암기, 복습, YHLab">
+  <meta name="author" content="YHLab">
+  
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="https://yhlab-team.github.io/">
+  <meta property="og:title" content="YHLab - Nemo">
+  <meta property="og:description" content="망각곡선 기반 간격 반복 학습으로 효율적인 학습을 경험하세요">
+  <meta property="og:image" content="https://yhlab-team.github.io/icons/Icon-512.png">
+  
+  <!-- Twitter -->
+  <meta property="twitter:card" content="summary_large_image">
+  <meta property="twitter:url" content="https://yhlab-team.github.io/">
+  <meta property="twitter:title" content="YHLab - Nemo">
+  <meta property="twitter:description" content="망각곡선 기반 간격 반복 학습으로 효율적인 학습을 경험하세요">
+  <meta property="twitter:image" content="https://yhlab-team.github.io/icons/Icon-512.png">
 
   <!-- iOS meta tags & icons -->
   <meta name="mobile-web-app-capable" content="yes">
@@ -30,8 +49,19 @@
   <!-- Favicon -->
   <link rel="icon" type="image/x-icon" href="favicon.ico" />
 
-  <title>yhlab_web</title>
+  <title>YHLab - Nemo</title>
   <link rel="manifest" href="manifest.json">
+
+  <!-- GitHub Pages SPA 라우팅 지원 -->
+  <script>
+    (function () {
+      var redirect = sessionStorage.redirect;
+      delete sessionStorage.redirect;
+      if (redirect && redirect != location.href) {
+        history.replaceState(null, null, redirect);
+      }
+    })();
+  </script>
 </head>
 
 <body>
