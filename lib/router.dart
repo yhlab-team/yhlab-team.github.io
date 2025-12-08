@@ -3,7 +3,7 @@ import 'package:go_router/go_router.dart';
 import 'package:yh_design_system/router.dart';
 import 'package:yhlab_web/pages/blog_detail.dart';
 import 'package:yhlab_web/pages/blog_list.dart';
-import 'package:yhlab_web/pages/home.dart';
+import 'package:yhlab_web/pages/home/home_page.dart';
 
 final class RouteNames {
   static const String home = "/"; // 메인
