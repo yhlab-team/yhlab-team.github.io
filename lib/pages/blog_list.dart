@@ -44,21 +44,75 @@ final class BlogListPage extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text(
-                              'Nemo Library',
-                              style: TextStyle(
-                                fontSize: isMobile ? 36 : 48,
-                                fontWeight: FontWeight.w900,
-                                color: const Color(0xFF0F172A),
-                              ),
+                            // 아이콘과 제목
+                            Row(
+                              children: [
+                                Container(
+                                  padding: const EdgeInsets.all(12),
+                                  decoration: BoxDecoration(
+                                    color: YHColor.primary.withAlpha(26),
+                                    borderRadius: BorderRadius.circular(12),
+                                  ),
+                                  child: Icon(
+                                    Icons.auto_stories,
+                                    size: isMobile ? 28 : 36,
+                                    color: YHColor.primary,
+                                  ),
+                                ),
+                                const SizedBox(width: 16),
+                                Expanded(
+                                  child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      ShaderMask(
+                                        shaderCallback:
+                                            (bounds) => LinearGradient(
+                                              colors: [
+                                                YHColor.primary,
+                                                YHColor.primary.withAlpha(180),
+                                              ],
+                                            ).createShader(bounds),
+                                        child: Text(
+                                          'Nemo Library',
+                                          style: TextStyle(
+                                            fontSize: isMobile ? 36 : 48,
+                                            fontWeight: FontWeight.w900,
+                                            color: Colors.white,
+                                          ),
+                                        ),
+                                      ),
+                                    ],
+                                  ),
+                                ),
+                              ],
                             ),
-                            const SizedBox(height: 16),
-                            Text(
-                              '학습 과학과 Nemo의 이야기',
-                              style: TextStyle(
-                                fontSize: isMobile ? 16 : 20,
-                                color: const Color(0xFF64748B),
-                                height: 1.6,
+                            const SizedBox(height: 20),
+                            // 부제목
+                            Container(
+                              padding: const EdgeInsets.only(left: 4),
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    '학습 과학과 Nemo의 이야기',
+                                    style: TextStyle(
+                                      fontSize: isMobile ? 18 : 22,
+                                      color: const Color(0xFF334155),
+                                      fontWeight: FontWeight.w600,
+                                      height: 1.5,
+                                    ),
+                                  ),
+                                  const SizedBox(height: 8),
+                                  Text(
+                                    '효율적인 학습법부터 실용적인 팁까지, 당신의 학습을 한 단계 업그레이드할 인사이트를 공유합니다.',
+                                    style: TextStyle(
+                                      fontSize: isMobile ? 14 : 16,
+                                      color: const Color(0xFF64748B),
+                                      height: 1.6,
+                                    ),
+                                  ),
+                                ],
                               ),
                             ),
                           ],

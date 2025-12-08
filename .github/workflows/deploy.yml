@@ -38,9 +38,6 @@ jobs:
       - name: Install dependencies
         run: flutter pub get
       
-      - name: Generate sitemap
-        run: dart run tool/generate_sitemap.dart
-      
       - name: Build web
         run: flutter build web --release --base-href "/"
       
