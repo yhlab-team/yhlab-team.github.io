@@ -3,7 +3,7 @@ import { YHColor } from '@/lib/constants/colors';
 export default function DeveloperCommentSection() {
   return (
     <section className="py-16 md:py-20 px-5 md:px-16">
-      <div className="max-w-4xl mx-auto">
+      <div className="max-w-lg mx-auto">
         <div
           className="rounded-2xl shadow-lg p-8 md:p-16"
           style={{
