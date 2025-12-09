@@ -1,0 +1,6 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://yhlab-team.github.io/sitemap.xml
+
+
