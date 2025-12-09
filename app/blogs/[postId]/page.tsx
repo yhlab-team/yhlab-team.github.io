@@ -46,23 +46,16 @@ const components = {
     <li className="text-base md:text-lg" style={{ color: '#334155' }} {...props} />
   ),
   strong: (props: any) => (
-    <strong className="font-bold" style={{ color: YHColor.textDefault }} {...props} />
+    <strong className="font-black" style={{ color: YHColor.textDefault }} {...props} />
   ),
   img: (props: any) => (
-    <div className="my-8 rounded-xl overflow-hidden">
-      <Image
-        src={props.src}
-        alt={props.alt || ''}
-        width={800}
-        height={600}
-        className="w-full h-auto"
-      />
-      {props.alt && (
-        <p className="text-center text-sm text-slate-500 mt-3 italic">
-          {props.alt}
-        </p>
-      )}
-    </div>
+    <Image
+      src={props.src}
+      alt={props.alt || ''}
+      width={800}
+      height={600}
+      className="w-full h-auto rounded-xl my-8"
+    />
   ),
 };
 
