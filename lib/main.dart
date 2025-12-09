@@ -14,6 +14,7 @@ final class YHLabApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
+      // title: 'Nemo - 학습부터 장기기억, 앱테크까지', // 로드 되었을 때 노출되는 타이틀. index.html에서 설정되면 할필요 없음.
       debugShowCheckedModeBanner: false,
       routerConfig: router,
       theme: ThemeData(
