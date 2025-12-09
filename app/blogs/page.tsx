@@ -1,6 +1,8 @@
 import Link from 'next/link';
 import { allBlogPosts } from '@/lib/data/blog-posts';
 import { YHColor } from '@/lib/constants/colors';
+import { MdAutoGraph, MdMonetizationOn } from 'react-icons/md';
+import { IconType } from 'react-icons';
 
 export const metadata = {
   title: 'Nemo Library - 학습 과학과 Nemo의 이야기',
@@ -9,9 +11,9 @@ export const metadata = {
 };
 
 // 아이콘 맵핑
-const iconMap: { [key: string]: string } = {
-  auto_graph: '📈',
-  monetization_on: '💰',
+const iconMap: { [key: string]: IconType } = {
+  auto_graph: MdAutoGraph,
+  monetization_on: MdMonetizationOn,
 };
 
 export default function BlogListPage() {
@@ -79,7 +81,7 @@ export default function BlogListPage() {
               href={`/blogs/${post.id}`}
               className="block"
             >
-              <article className="bg-white rounded-2xl border border-slate-200 shadow-sm hover:shadow-md transition-shadow p-6 md:p-8">
+              <article className="bg-white rounded-2xl border border-slate-200 shadow-lg hover:shadow-xl transition-shadow p-6 md:p-8">
                 <div className="flex items-start gap-4 mb-5">
                   <div
                     className="p-3 rounded-xl flex-shrink-0"
@@ -87,9 +89,17 @@ export default function BlogListPage() {
                       backgroundColor: `${YHColor.primary}1A`,
                     }}
                   >
-                    <span className="text-3xl">
-                      {iconMap[post.icon] || '📝'}
-                    </span>
+                    {(() => {
+                      const Icon = iconMap[post.icon];
+                      return Icon ? (
+                        <Icon
+                          className="text-4xl"
+                          style={{ color: YHColor.primary }}
+                        />
+                      ) : (
+                        <span className="text-3xl">📝</span>
+                      );
+                    })()}
                   </div>
                   <div className="flex-1">
                     <h2

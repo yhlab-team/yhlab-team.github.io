@@ -6,6 +6,8 @@ import fs from 'fs';
 import path from 'path';
 import { MDXRemote } from 'next-mdx-remote/rsc';
 import Image from 'next/image';
+import { MdAutoGraph, MdMonetizationOn } from 'react-icons/md';
+import { IconType } from 'react-icons';
 
 // MDX 컴포넌트 정의
 const components = {
@@ -65,9 +67,9 @@ const components = {
 };
 
 // 아이콘 맵핑
-const iconMap: { [key: string]: string } = {
-  auto_graph: '📈',
-  monetization_on: '💰',
+const iconMap: { [key: string]: IconType } = {
+  auto_graph: MdAutoGraph,
+  monetization_on: MdMonetizationOn,
 };
 
 export async function generateStaticParams() {
@@ -76,9 +78,10 @@ export async function generateStaticParams() {
   }));
 }
 
-export async function generateMetadata({ params }: { params: { postId: string } }) {
-  const post = allBlogPosts.find((p) => p.id === params.postId);
-  
+export async function generateMetadata({ params }: { params: Promise<{ postId: string }> }) {
+  const { postId } = await params;
+  const post = allBlogPosts.find((p) => p.id === postId);
+
   if (!post) {
     return {
       title: '글을 찾을 수 없습니다',
@@ -98,16 +101,17 @@ export async function generateMetadata({ params }: { params: { postId: string } 
 export default async function BlogDetailPage({
   params,
 }: {
-  params: { postId: string };
+  params: Promise<{ postId: string }>;
 }) {
-  const post = allBlogPosts.find((p) => p.id === params.postId);
+  const { postId } = await params;
+  const post = allBlogPosts.find((p) => p.id === postId);
 
   if (!post) {
     notFound();
   }
 
   // MDX 파일 읽기
-  const mdxPath = path.join(process.cwd(), 'content', `${params.postId}.mdx`);
+  const mdxPath = path.join(process.cwd(), 'content', `${postId}.mdx`);
   const mdxContent = fs.readFileSync(mdxPath, 'utf-8');
 
   return (
@@ -142,10 +146,17 @@ export default async function BlogDetailPage({
 
           {/* 아이콘 */}
           <div
-            className="w-20 h-20 rounded-2xl flex items-center justify-center text-5xl mb-6"
+            className="w-20 h-20 rounded-2xl flex items-center justify-center mb-6"
             style={{ backgroundColor: `${YHColor.primary}1A` }}
           >
-            {iconMap[post.icon] || '📝'}
+            {(() => {
+              const Icon = iconMap[post.icon];
+              return Icon ? (
+                <Icon className="text-5xl" style={{ color: YHColor.primary }} />
+              ) : (
+                <span className="text-5xl">📝</span>
+              );
+            })()}
           </div>
 
           {/* 제목 */}
