@@ -20,27 +20,27 @@ const components = {
   ),
   h2: (props: any) => (
     <h2
-      className="text-2xl md:text-3xl font-black mb-4 mt-10"
+      className="text-2xl md:text-3xl font-black mb-6 mt-16"
       style={{ color: YHColor.textDefault }}
       {...props}
     />
   ),
   h3: (props: any) => (
     <h3
-      className="text-xl md:text-2xl font-black mb-3 mt-8"
+      className="text-xl md:text-2xl font-black mb-4 mt-12"
       style={{ color: YHColor.textDefault }}
       {...props}
     />
   ),
   p: (props: any) => (
     <p
-      className="text-base md:text-lg leading-relaxed mb-6"
+      className="text-base md:text-lg leading-relaxed mb-8"
       style={{ color: '#334155' }}
       {...props}
     />
   ),
   ul: (props: any) => (
-    <ul className="list-disc list-inside mb-6 space-y-2 ml-4" {...props} />
+    <ul className="list-disc list-inside mb-8 space-y-3 ml-4" {...props} />
   ),
   li: (props: any) => (
     <li className="text-base md:text-lg" style={{ color: '#334155' }} {...props} />
@@ -49,20 +49,13 @@ const components = {
     <strong className="font-bold" style={{ color: YHColor.textDefault }} {...props} />
   ),
   img: (props: any) => (
-    <div className="my-8 rounded-xl overflow-hidden">
-      <Image
-        src={props.src}
-        alt={props.alt || ''}
-        width={800}
-        height={600}
-        className="w-full h-auto"
-      />
-      {props.alt && (
-        <p className="text-center text-sm text-slate-500 mt-3 italic">
-          {props.alt}
-        </p>
-      )}
-    </div>
+    <Image
+      src={props.src}
+      alt={props.alt || ''}
+      width={600}
+      height={400}
+      className="w-full max-w-xl mx-auto h-auto rounded-xl my-12 block"
+    />
   ),
 };
 
