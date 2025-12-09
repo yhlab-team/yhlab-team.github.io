@@ -1,5 +1,5 @@
 name: yhlab_web
-description: "YHLab - 삶의 흐름을 매끄럽게 해주는 도구를 만듭니다"
+description: "📌📑 학습부터 장기기억, 💰 앱테크까지. 평생 공부시대의 든든한 파트너!"
 # The following line prevents the package from being accidentally published to
 # pub.dev using `flutter pub publish`. This is preferred for private packages.
 publish_to: 'none' # Remove this line if you wish to publish to pub.dev
