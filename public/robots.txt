@@ -1,6 +1,3 @@
 User-agent: *
 Allow: /
-
-Sitemap: https://yhlab-team.github.io/sitemap.xml
-
-
+Sitemap: http://yhlab-team.github.io/sitemap.xml
