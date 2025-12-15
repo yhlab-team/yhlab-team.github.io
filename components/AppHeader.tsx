@@ -12,6 +12,7 @@ export default function AppHeader() {
   const navItems = [
     { label: '메인', path: '/' },
     { label: '블로그', path: '/blogs' },
+    { label: 'Apps', path: '/apps' },
   ];
 
   return (
