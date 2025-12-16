@@ -16,7 +16,7 @@ const appItems: ListItem[] = [
     {
         id: 'nemo',
         title: 'Nemo',
-        description: '에빙하우스 망각곡선 기반 과학적 복습 관리 앱',
+        description: '📌📑 학습부터 장기기억, 💰 앱테크까지평생 공부시대의 든든한 파트너!',
         icon: (
             <Image
                 src="/assets/images/nemo_icon.png"
